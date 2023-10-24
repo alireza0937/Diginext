@@ -1,4 +1,3 @@
-from string import digits, ascii_letters
 import random
 import re
 
@@ -8,26 +7,26 @@ def generate_otp():
     return random_5_digit_number
 
 
+class GenerateOTP:
+    def __init__(self):
+        ...
+
+
 def validate_username_and_password(username, password):
-    if digits in username or ascii_letters in username or '' in username:
-        pattern = r'^(?=.*[A-Z])(?=.*[a-z]).*$'
-        return bool(re.match(pattern, password)) and len(password) > 8
-    return False
+    password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$'
+    username_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\s]*$'
+    return bool(re.match(password_pattern, password) and re.match(username_pattern, username))
 
 
 def validate_phone_number(phone_number):
-    try:
-        int(phone_number)
-    except:
-        return False
-    else:
-        if len(str(phone_number)) == 8:
-            return True
+    pattern = r'^0\d{10}$'
+    return bool(re.match(pattern, phone_number))
 
 
 def validata_company_name(company_name):
     pattern = r'^[\u0600-\u06FF\s]+$'
     response = re.match(pattern, company_name) is not None
     return response
+
 
 

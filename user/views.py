@@ -7,8 +7,16 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from user.models import User
 from .functions import generate_otp, validate_username_and_password, validate_phone_number, validata_company_name
-from .serializers import FirstStepRegistrationSerializer, SecondStepRegistrationSerializer, ThirdStepRegistrationSerializer
+from .serializers import FirstStepRegistrationSerializer, SecondStepRegistrationSerializer, \
+    ThirdStepRegistrationSerializer
 import redis
+
+
+def create_user(username, password):
+    User.objects.create_user(username=username, password=password)
+    user = User.objects.get(username=username)
+    token, created = Token.objects.get_or_create(user=user)
+    return token
 
 
 class FirstStepRegistration(APIView):
@@ -18,19 +26,20 @@ class FirstStepRegistration(APIView):
         request=FirstStepRegistrationSerializer
     )
     def post(self, request: HttpRequest):
-        if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            validation = validate_username_and_password(username, password)
-            if validation:
-                user_exists: bool = User.objects.filter(username=username).exists()
-                if user_exists is False:
-                    User.objects.create_user(username=username, password=password)
-                    user = User.objects.get(username=username)
-                    token, created = Token.objects.get_or_create(user=user)
-                    return JsonResponse({"message": "Successfully",
-                                         "Authentication Token": token.key})
-            return JsonResponse({'message': 'Username already exist..'}, status=status.HTTP_400_BAD_REQUEST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        validation = validate_username_and_password(username, password)
+        if validation:
+            user_exists: bool = User.objects.filter(username=username).exists()
+            if user_exists is False:
+                token = create_user(username=username, password=password)
+                # User.objects.create_user(username=username, password=password)
+                # user = User.objects.get(username=username)
+                # token, created = Token.objects.get_or_create(user=user)
+                return JsonResponse({"message": "Successfully",
+                                     "Authentication Token": token.key})
+
+            return JsonResponse({'message': 'Username already exist..'}, status=status.HTTP_409_CONFLICT)
         return JsonResponse({"message": "Inserted username or password is not valid.."},
                             status=status.HTTP_400_BAD_REQUEST)
 
@@ -44,7 +53,6 @@ class SecondStepRegistration(APIView):
         token = request.headers.get('Authorization').split(' ')[1]
         validation = validate_phone_number(phone_number)
         if validation:
-
             user_information = Token.objects.get(key=token).user.id
             user = User.objects.filter(id=user_information).first()
             user2 = User.objects.filter(id=user_information, phone_number=phone_number).first()
@@ -55,7 +63,7 @@ class SecondStepRegistration(APIView):
                 if connection.get(user_information) is None and connection.get(
                         f"{user_information}_timelimit") is None:
                     otp = generate_otp()
-                    connection.setex(user_information, 240, otp)
+                    connection.setex(user_information, 120, otp)
                     connection.setex(f"{user_information}_timelimit", 300, otp)
                     return JsonResponse({"message": "Phone number set successfully.",
                                          "otp": otp})
