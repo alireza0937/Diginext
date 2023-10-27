@@ -14,3 +14,6 @@ class ThirdStepRegistrationSerializer(serializers.Serializer):
     otp = serializers.IntegerField(required=True)
     cars = serializers.IntegerField(required=True)
     company_name = serializers.CharField(required=True)
+
+
+

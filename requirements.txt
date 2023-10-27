@@ -10,7 +10,7 @@ drf-yasg==1.21.7
 inflection==0.5.1
 jsonschema==4.19.1
 jsonschema-specifications==2023.7.1
-mysqlclient==2.2.0
+mysqlclient
 packaging==23.2
 PyJWT==2.8.0
 pytz==2023.3.post1

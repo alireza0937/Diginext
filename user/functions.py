@@ -1,11 +1,9 @@
 import random
-import redis
 import re
-
+import redis
 from django.http import HttpRequest
-
-from user.models import User, Company
 from rest_framework.authtoken.models import Token
+from user.models import User, Company
 
 
 def generate_otp():
