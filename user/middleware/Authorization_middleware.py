@@ -38,8 +38,7 @@ class TokenCheck:
             request.auth = user
 
         response = self.get_response(request)
-        response['auth'] = user
-        response.auth2 = user
+
 
         return response
 
