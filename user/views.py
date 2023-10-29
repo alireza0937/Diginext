@@ -59,7 +59,7 @@ class SecondStepRegistration(APIView):
 
 class ThirdStepRegistration(APIView):
     @extend_schema(request=ThirdStepRegistrationSerializer)
-    def post(self, request: HttpRequest):
+    def post(self, request):
         try:
             token = get_token_from_request(request)
             user_id = get_user_id_from_token(token)
@@ -72,11 +72,11 @@ class ThirdStepRegistration(APIView):
             if validate_otp(request, otp):
                 if update_user_profile(request, user_id, connection):
                     return Response({"message": "Account activated successfully"})
-                else:
-                    return Response({"message": "Failed to update user profile"})
-            else:
-                return Response({"message": "Wrong OTP"})
-        except:
+                return Response({"message": "Failed to update user profile"})
+
+            return Response({"message": "Wrong OTP"})
+
+        except Exception as e:
             return Response({"message": "The entered information is not complete"}, status=status.HTTP_400_BAD_REQUEST)
 
 

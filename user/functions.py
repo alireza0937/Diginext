@@ -30,7 +30,7 @@ def create_user(username, password):
 
 
 def connect_to_redis_and_retrieve_info(user_information, phone_number):
-    connection = redis.Redis(host='localhost', port=6379, decode_responses=True)
+    connection = create_redis_connection()
     if connection.get(user_information) is None and connection.get(
             f"{user_information}_timelimit") is None:
         otp = generate_otp()
