@@ -4,6 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .functions import *
+from .redis_connection import redis_connection
 from .serializers import FirstStepRegistrationSerializer, SecondStepRegistrationSerializer, \
     ThirdStepRegistrationSerializer
 
@@ -16,8 +17,8 @@ class FirstStepRegistration(APIView):
         try:
             username = request.data.get('username')
             password = request.data.get('password')
-
-            if not validate_username_and_password(username, password):
+            serializer = FirstStepRegistrationSerializer(data=request.data)
+            if not serializer.is_valid():
                 return Response({"message": "Inserted username or password is not valid."},
                                 status=status.HTTP_400_BAD_REQUEST)
 
@@ -37,21 +38,21 @@ class SecondStepRegistration(APIView):
     def post(self, request):
         try:
             phone_number = request.data.get("phone_number")
-            authorization_header = request.headers.get('Authorization')
-            token = authorization_header.split(' ')[1] if authorization_header else None
-
-            if not phone_number or not validate_phone_number(phone_number):
-                return Response({"message": "Phone number is not correct..."}, status=status.HTTP_400_BAD_REQUEST)
-
-            user, user_information = get_user_id(token=token)
-
+            user = request.META.get("user")
+            serializer = SecondStepRegistrationSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response({"message": "Phone number is not correct or is duplicate ..."},
+                                status=status.HTTP_400_BAD_REQUEST)
             if user is not None or user.phone_number == phone_number:
-                try:
-                    response, otp = connect_to_redis_and_retrieve_info(user_information, phone_number)
+                if redis_connection.get_key(user.pk) is None and redis_connection.get_key(f"{user.pk}_timelimit") is None:
+                    otp = generate_otp()
+                    redis_connection.setex_key(user.pk, 120, otp)
+                    redis_connection.setex_key(f"{user.pk}_timelimit", 300, otp)
+                    redis_connection.setex_key(f"{user.pk}_phone", 120, phone_number)
                     return Response({"message": "Phone number set successfully.", "otp": otp})
-                except:
-                    return Response({"message": "Can't request OTP for 5 minutes."}, status=status.HTTP_400_BAD_REQUEST)
 
+                return Response({"message": "Can't request OTP for 5 minutes."},
+                                status=status.HTTP_400_BAD_REQUEST)
             return Response({"message": "Phone number exists."}, status=status.HTTP_409_CONFLICT)
         except:
             return Response({"message": "The entered information is not complete"}, status=status.HTTP_400_BAD_REQUEST)
@@ -61,22 +62,25 @@ class ThirdStepRegistration(APIView):
     @extend_schema(request=ThirdStepRegistrationSerializer)
     def post(self, request):
         try:
-            token = get_token_from_request(request)
-            user_id = get_user_id_from_token(token)
-            connection = create_redis_connection()
-            otp = get_otp_from_redis(connection, user_id)
+            user = request.META.get("user")
+            otp = redis_connection.get_key(user.pk)
+            insert_otp = request.data.get('otp')
+            number_of_cars = request.data.get("cars")
+            company_name = request.data.get("company_name")
+            serializer = ThirdStepRegistrationSerializer(data=request.data)
 
             if otp is None:
                 return Response({"message": "The OTP has expired. Please request OTP again"})
 
-            if validate_otp(request, otp):
-                if update_user_profile(request, user_id, connection):
-                    return Response({"message": "Account activated successfully"})
-                return Response({"message": "Failed to update user profile"})
+            if serializer.is_valid():
+                if validate_otp(insert_otp, otp):
+                    if create_company_profile(number_of_cars, company_name, user, redis_connection):
+                        return Response({"message": "Account activated successfully"})
+                    return Response({"message": "The entered information is not complete"})
 
-            return Response({"message": "Wrong OTP"})
-
-        except Exception as e:
+                return Response({"message": "Wrong OTP"})
+            return Response({"message": "The company name should only contains persian character."})
+        except:
             return Response({"message": "The entered information is not complete"}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -84,18 +88,16 @@ class State(APIView):
 
     def post(self, request):
         try:
-            token = request.headers.get('Authorization').split(" ")[1]
-            user_id = Token.objects.get(key=token).user.id
+            user = request.META.get("user")
         except Token.DoesNotExist:
             return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
-        user = User.objects.filter(id=user_id).first()
-        connection = create_redis_connection()
+        user = User.objects.filter(id=user.pk).first()
 
         if user.phone_number is None:
             return Response({"message": "You should insert your phone number."}, status=status.HTTP_400_BAD_REQUEST)
         elif user.is_active:
             return Response({"message": "Account already activated."}, status=status.HTTP_200_OK)
-        elif connection.get(user_id):
+        elif redis_connection.get_key(user.pk):
             return Response({"message": "You should enter your OTP and then provide additional information."},
                             status=status.HTTP_200_OK)

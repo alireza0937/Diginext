@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'drf_spectacular_sidecar',
     'rest_framework.authtoken',
     'user',
+    'standard',
 ]
 
 MIDDLEWARE = [
@@ -31,6 +32,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'user.middleware.Authorization_middleware.AuthorizationMiddleWare',
+    'standard.middleware.request_time_middleware.RequestTimeMiddleware',
     'user.middleware.Authorization_middleware.TokenCheck',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -115,14 +117,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
+REDIS_CONFIG = {
+    "HOST": "localhost",  # Redis server host
+    "PORT": 6379,         # Redis server port
 }
-

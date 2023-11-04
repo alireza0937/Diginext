@@ -26,3 +26,15 @@ class Company(models.Model):
     class Meta:
         verbose_name_plural = 'Company'
         db_table = 'Company'
+
+
+class Car(models.Model):
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.company_id)
+
+    class Meta:
+        verbose_name_plural = 'Cars'
+        db_table = 'Cars'
