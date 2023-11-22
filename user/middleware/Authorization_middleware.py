@@ -1,21 +1,5 @@
-from django.http import HttpResponseForbidden
 from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-
 from user.models import User
-
-
-class AuthorizationMiddleWare:
-
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden("Unauthorized")
-
-        response = self.get_response(request)
-        return response
 
 
 class TokenCheck:
@@ -35,7 +19,7 @@ class TokenCheck:
                 user = User.objects.filter(id=user_information).first()
                 request.META['HTTP_AUTHORIZATION'] = authorization_header
                 request.META['user'] = user
-            except :
+            except:
                 response = self.get_response(request)
                 return response
 

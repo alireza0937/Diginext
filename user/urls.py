@@ -1,9 +1,13 @@
 from django.urls import path
-from . import views
+from user.views.FirstStepRegistrationView import FirstStepRegistrationAPIView
+from user.views.SecondStepRegistrationView import SecondStepRegistrationAPIView
+from user.views.StateView import StateAPIView
+from user.views.ThirdStepRegistrationView import ThirdStepRegistrationAPIView
+
 urlpatterns = [
-    path('', views.FirstStepRegistration.as_view(), name='first-step-registration-page'),
-    path('verify-token/', views.SecondStepRegistration.as_view(), name='second-step-registration-page'),
-    path('verify-otp/', views.ThirdStepRegistration.as_view(), name='third-step-registration-page'),
-    path('state/', views.State.as_view(), name='state-page'),
+    path('', FirstStepRegistrationAPIView.as_view(), name='first-step-registration-page'),
+    path('verify-token/', SecondStepRegistrationAPIView.as_view(), name='second-step-registration-page'),
+    path('verify-otp/', ThirdStepRegistrationAPIView.as_view(), name='third-step-registration-page'),
+    path('state/', StateAPIView.as_view(), name='state-page'),
 
 ]

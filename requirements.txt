@@ -25,3 +25,7 @@ typing_extensions==4.8.0
 tzdata==2023.3
 uritemplate==4.1.1
 mysqlclient
+requests~=2.31.0
+geopy~=2.4.0
+shapely~=2.0.2
+schedule~=1.2.1

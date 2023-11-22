@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cb9630d6-b7bd-4908-9f9c-b2c8c99ea8a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DiginextProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DiginextProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iconfig/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/iconfig/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iconfig/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/iconfig/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/standard/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/middleware/request_time_middleware.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/migrations/0002_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/migrations/0003_rename_maximum_speed_standard_maximum_velocity_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/standard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/standard/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/management/commands/cars_async.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/management/commands/cars_async.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/middleware/Authorization_middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/middleware/Authorization_middleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/redis_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/redis_connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Xtv1aqFqiXN6MZK2NeVAqxAsZE" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programing Files/Django/DRF/DiginextProject&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programing Files\Django\DRF\DiginextProject\report\models" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="DiginextProject" type="Python.DjangoServer" factoryName="Django server">
+      <module name="DiginextProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cb9630d6-b7bd-4908-9f9c-b2c8c99ea8a7" name="Changes" comment="" />
+      <created>1699460976126</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699460976126</updated>
+      <workItem from="1699460978058" duration="31579000" />
+      <workItem from="1699599147805" duration="182560000" />
+      <workItem from="1700377325165" duration="53478000" />
+      <workItem from="1700572843762" duration="16398000" />
+      <workItem from="1700641468836" duration="12225000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

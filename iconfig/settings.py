@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'user',
     'standard',
+    'report',
+
 ]
 
 MIDDLEWARE = [
@@ -31,8 +33,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'user.middleware.Authorization_middleware.AuthorizationMiddleWare',
-    'standard.middleware.request_time_middleware.RequestTimeMiddleware',
     'user.middleware.Authorization_middleware.TokenCheck',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -70,6 +70,8 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+
 AUTH_USER_MODEL = 'user.User'
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -121,3 +123,4 @@ REDIS_CONFIG = {
     "HOST": "localhost",  # Redis server host
     "PORT": 6379,         # Redis server port
 }
+

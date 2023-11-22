@@ -1,10 +1,11 @@
 import concurrent.futures
+import time
 from django.core.management.base import BaseCommand
-from user.models import Company, Car
+from user.models import Company
+from user.models import Car
 
 
 class Command(BaseCommand):
-    help = 'Create tasks using threads based on a number from the database'
 
     def create_task(self, company_id):
         Car.objects.create(company_id=company_id)
@@ -21,3 +22,13 @@ class Command(BaseCommand):
 
         except:
             pass
+
+
+new_obj = Command()
+while True:
+    new_obj.handle()
+    try:
+        time.sleep(20)
+
+    except KeyboardInterrupt:
+        pass
