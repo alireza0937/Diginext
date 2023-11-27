@@ -24,10 +24,12 @@ INSTALLED_APPS = [
     'user',
     'standard',
     'report',
+    'silk',
 
 ]
 
 MIDDLEWARE = [
+    'silk.middleware.SilkyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -38,7 +40,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-
 
 ROOT_URLCONF = 'iconfig.urls'
 
@@ -70,7 +71,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 AUTH_USER_MODEL = 'user.User'
 AUTH_PASSWORD_VALIDATORS = [
@@ -121,6 +121,5 @@ SPECTACULAR_SETTINGS = {
 
 REDIS_CONFIG = {
     "HOST": "localhost",  # Redis server host
-    "PORT": 6379,         # Redis server port
+    "PORT": 6379,  # Redis server port
 }
-

@@ -13,15 +13,14 @@ class Command(BaseCommand):
         all_cars = CarLocation.objects.all().values('car').distinct()
         for cars in all_cars:
             reporting_instance = Reporting(car_id=cars.get('car'))
-            reporting_instance.generate_and_catch_data(start_date=today,
+            reporting_instance.generate_and_cache_data(start_date=today,
                                                        end_date=end_of_day,
                                                        car_id=int(cars.get('car')))
 
 
-current_time = datetime.now().time()
-
 new_obj = Command()
 while True:
+    current_time = datetime.now().time()
     if current_time.hour == 23 and current_time.minute == 0:
         new_obj.handle()
 
@@ -36,4 +35,3 @@ while True:
 
         except KeyboardInterrupt:
             pass
-

@@ -11,5 +11,6 @@ urlpatterns = [
     path('register/', include('user.urls')),
     path('standards/', include("standard.urls")),
     path('report/', include("report.urls")),
+    path('silk/', include('silk.urls', namespace='silk')),
 
 ]

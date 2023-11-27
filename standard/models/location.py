@@ -1,7 +1,6 @@
 import json
 from django.db import models
 from redis_connection import redis_connection
-from standard.models.standard import Standard
 from user.models import Car
 from django.db.models.signals import post_save
 from django.dispatch import receiver
