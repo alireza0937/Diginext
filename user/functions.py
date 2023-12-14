@@ -10,8 +10,7 @@ def generate_otp():
 
 
 def create_user(username, password):
-    User.objects.create_user(username=username, password=password)
-    user = User.objects.get(username=username)
+    user = User.objects.create_user(username=username, password=password)
     token, created = Token.objects.get_or_create(user=user)
     return token
 
