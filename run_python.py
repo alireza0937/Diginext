@@ -3,7 +3,7 @@ import multiprocessing
 
 
 def run_django():
-    django_command = "python manage.py runserver"
+    django_command = "python manage.py runserver 0.0.0.0:8000"
     try:
         subprocess.run(django_command, shell=True)
     except KeyboardInterrupt:

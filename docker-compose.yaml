@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  web:
+    image: diginext:latest
+    container_name: django
+    ports:
+      - "8000:8000"
+    #environment:
+      #- DJANGO_DB_HOST=pegah
+    depends_on:
+      - db
+      - redis
+    command: python run_python.py
+     
+  db:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: 'diginext_db'
+      #MYSQL_USER: 'root'
+      #MYSQL_PASSWORD: 'pegah'
+      MYSQL_ROOT_PASSWORD: 'pegah'
+    ports:
+      - "3306:3306"
+       
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+

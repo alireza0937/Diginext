@@ -65,7 +65,7 @@ DATABASES = {
         'NAME': 'diginext_db',
         'USER': 'root',
         'PASSWORD': 'pegah',
-        'HOST': 'localhost',
+        'HOST': 'mysql',
         'PORT': '3306',
     }
 }
@@ -118,6 +118,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 REDIS_CONFIG = {
-    "HOST": "localhost",  # Redis server host
+    "HOST": "redis",  # Redis server host
     "PORT": 6379,  # Redis server port
 }
