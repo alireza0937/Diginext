@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-4y@^k=oo7lj(8_vx3))bslc$k*-2+)clcx007vqavp##80zmzq
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.9', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.9', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,12 +24,10 @@ INSTALLED_APPS = [
     'user',
     'standard',
     'report',
-    'silk',
 
 ]
 
 MIDDLEWARE = [
-    'silk.middleware.SilkyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

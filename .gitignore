@@ -4,4 +4,4 @@ __pycache__/
 .idea/
 /logs/
 *.log
-/migrations/
+**/migrations/
